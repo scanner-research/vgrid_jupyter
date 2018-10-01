@@ -58,6 +58,7 @@ module.exports = [
      path: path.resolve(__dirname, '..', 'vgrid_jupyter', 'static'),
      libraryTarget: 'amd'
    },
+   module: { rules: rules }
   },
 
   {// Bundle for the notebook containing the custom widget views and models
