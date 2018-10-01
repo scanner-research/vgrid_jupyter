@@ -1,0 +1,6 @@
+js/node_modules
+js/dist
+*.egg-info
+npm-debug.log
+vgrid_jupyter/static
+**/__pycache__
