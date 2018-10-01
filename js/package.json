@@ -47,5 +47,8 @@
     "mobx-react": "^4.1.8",
     "react": "^16.5.2",
     "react-dom": "^16.5.2"
+  },
+  "config": {
+    "unsafe-perm": true
   }
 }
