@@ -11,3 +11,4 @@ class VGridWidget(widgets.DOMWidget):
     jsglobals = Dict({}).tag(sync=True)
     settings = Dict({}).tag(sync=True)
     selected = List([]).tag(sync=True)
+    ignored = List([]).tag(sync=True)
