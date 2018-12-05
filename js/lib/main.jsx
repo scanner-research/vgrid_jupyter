@@ -49,14 +49,16 @@ export class VGridContainer extends React.Component {
   }
 
   render() {
-    let JupyterButton = () => <button onClick={this._onClick}>{
+    let useJupyterKeys = this.props.settings.has('jupyter_keybindings') ?
+        this.props.settings.get('jupyter_keybindings') : false;
+    let JupyterButton = <button onClick={this._onClick}>{
         this.state.keyboardDisabled ? 'Enable Jupyter keyboard' : 'Disable Jupyter keyboard'
-    }</button>;
+      }</button>;
     return (
       <div className='vgrid-container' onClick={(e) => { e.stopPropagation(); }}>
-        <JupyterButton />
+        {!useJupyterKeys && JupyterButton}
         {this.props.data !== null ? <VGrid {...this.props} /> : <span>No results.</span>}
-        <JupyterButton />
+        {!useJupyterKeys && JupyterButton}
       </div>
     )
   }
