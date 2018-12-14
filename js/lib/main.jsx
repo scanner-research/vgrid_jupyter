@@ -86,7 +86,7 @@ export let VGridView = widgets.DOMWidgetView.extend({
     let onSelect = (selected) => {
       updateFields({selected: selected});
     };
- 
+
     let onIgnore = (ignored) => {
       updateFields({ignored: ignored});
     };
@@ -94,6 +94,12 @@ export let VGridView = widgets.DOMWidgetView.extend({
     ReactDOM.render(
       <VGridContainer data={data} settings={settings} onSelect={onSelect} onIgnore={onIgnore} />,
       this.el);
+  },
+
+  remove: function() {
+    if (!ReactDOM.unmountComponentAtNode(this.el)) {
+      console.error('Failed to unmount VGrid');
+    }
   }
 });
 
