@@ -43,8 +43,8 @@
   "dependencies": {
     "@jupyter-widgets/base": "^1.0.0",
     "lodash": "^4.17.4",
-    "mobx": "^5.5.0",
-    "mobx-react": "^4.1.8",
+    "mobx": "^4.8.0",
+    "mobx-react": "^5.4.3",
     "react": "^16.5.2",
     "react-dom": "^16.5.2"
   },
