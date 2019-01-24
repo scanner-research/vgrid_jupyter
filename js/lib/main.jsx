@@ -70,6 +70,7 @@ export let VGridView = widgets.DOMWidgetView.extend({
     let settings = observable.map(this.model.get('settings'));
 
     let fields = {
+      groups: [],
       selected: [],
       ignored: []
     };
@@ -83,6 +84,10 @@ export let VGridView = widgets.DOMWidgetView.extend({
       this.model.save_changes();
     };
 
+    let onUpdateGroups = (groups) => {
+      updateFields({groups: groups});
+    }
+
     let onSelect = (selected) => {
       updateFields({selected: selected});
     };
@@ -92,7 +97,8 @@ export let VGridView = widgets.DOMWidgetView.extend({
     };
 
     ReactDOM.render(
-      <VGridContainer data={data} settings={settings} onSelect={onSelect} onIgnore={onIgnore} />,
+      <VGridContainer data={data} settings={settings} onSelect={onSelect} onIgnore={onIgnore}
+        onUpdateGroups={onUpdateGroups}/>,
       this.el);
   },
 

@@ -12,3 +12,4 @@ class VGridWidget(widgets.DOMWidget):
     settings = Dict({}).tag(sync=True)
     selected = List([]).tag(sync=True)
     ignored = List([]).tag(sync=True)
+    groups = List([]).tag(sync=True)
