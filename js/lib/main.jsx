@@ -85,7 +85,7 @@ export let VGridView = widgets.DOMWidgetView.extend({
     };
 
     let onUpdateGroups = (groups) => {
-      updateFields({groups: groups});
+      updateFields({groups: JSON.parse(JSON.stringify(groups))});
     }
 
     let onSelect = (selected) => {
