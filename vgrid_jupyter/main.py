@@ -8,6 +8,7 @@ class VGridWidget(widgets.DOMWidget):
     _view_name = Unicode('VGridView').tag(sync=True)
     _view_module = Unicode('vgrid_jupyter').tag(sync=True)
     result = Dict({}).tag(sync=True)
+    labeledresult = List([]).tag(sync=True)
     jsglobals = Dict({}).tag(sync=True)
     settings = Dict({}).tag(sync=True)
     selected = List([]).tag(sync=True)

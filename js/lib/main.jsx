@@ -72,7 +72,8 @@ export let VGridView = widgets.DOMWidgetView.extend({
     let fields = {
       groups: [],
       selected: [],
-      ignored: []
+      ignored: [],
+      labeledresult: []
     };
 
     let updateFields = (updates) => {
@@ -80,7 +81,6 @@ export let VGridView = widgets.DOMWidgetView.extend({
       for (let [k, v] of Object.entries(fields)) {
         this.model.set(k, v);
       }
-      console.log(this.model, fields);
       this.model.save_changes();
     };
 
@@ -96,8 +96,13 @@ export let VGridView = widgets.DOMWidgetView.extend({
       updateFields({ignored: ignored});
     };
 
+    let onUpdateResult = (result) => {
+      updateFields({labeledresult: JSON.parse(JSON.stringify(result))});
+    }
+
     ReactDOM.render(
       <VGridContainer data={data} settings={settings} onSelect={onSelect} onIgnore={onIgnore}
+        onUpdateResult={onUpdateResult}
         onUpdateGroups={onUpdateGroups}/>,
       this.el);
   },
