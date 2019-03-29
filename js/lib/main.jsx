@@ -84,6 +84,7 @@ export let VGridView = widgets.DOMWidgetView.extend({
   render: function() {
     ReactDOM.render(
       <VGridContainer intervals={this.intervals} database={this.database}
+                      settings={this.model.get('settings')}
                       label_callback={this.label_callback.bind(this)} />,
       this.el);
   },
