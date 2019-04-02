@@ -8,7 +8,7 @@ configure({ isolateGlobalState: true });
 
 import React from 'react';
 import ReactDOM from 'react-dom';
-import VGrid from 'vgrid';
+import {IntervalSet, Database, VGrid, vdata_from_json} from 'vgrid';
 
 // For some reason, `import` syntax doesn't work here? AMD issues?
 let widgets = require('@jupyter-widgets/base');
@@ -26,11 +26,12 @@ export class VGridContainer extends React.Component {
   _onClick = () => {
     let disabled = !this.state.keyboardDisabled;
 
-    // wcrichto 5-25-18: in order to disable the Jupyter keyboard manager, we have to call disable in an infinite
-    // loop. This is because the ipywidgets framework uses KeyboardManager.register_events on the widget container
-    // which can cause unpredictable behavior in unexpectedly reactivating the keyboard manager (hard to consistently
-    // maintain focus on the widget area), so the simplest hacky solution is just to forcibly disable the manager
-    // by overriding all other changes to its settings.
+    // wcrichto 5-25-18: in order to disable the Jupyter keyboard manager, we have to call disable
+    // in an infinite loop. This is because the ipywidgets framework uses
+    // KeyboardManager.register_events on the widget container which can cause unpredictable behavior
+    // in unexpectedly reactivating the keyboard manager (hard to consistently maintain focus on the
+    // widget area), so the simplest hacky solution is just to forcibly disable the manager by
+    // overriding all other changes to its settings.
     if (disabled) {
       this._timer = setInterval(() => {Jupyter.keyboard_manager.disable();}, 100);
     } else {
@@ -49,61 +50,45 @@ export class VGridContainer extends React.Component {
   }
 
   render() {
-    let useJupyterKeys = this.props.settings.has('jupyter_keybindings') ?
-        this.props.settings.get('jupyter_keybindings') : false;
     let JupyterButton = <button onClick={this._onClick}>{
         this.state.keyboardDisabled ? 'Enable Jupyter keyboard' : 'Disable Jupyter keyboard'
       }</button>;
     return (
       <div className='vgrid-container' onClick={(e) => { e.stopPropagation(); }}>
-        {!useJupyterKeys && JupyterButton}
+        {JupyterButton}
         {this.props.data !== null ? <VGrid {...this.props} /> : <span>No results.</span>}
-        {!useJupyterKeys && JupyterButton}
+        {JupyterButton}
       </div>
     )
   }
 }
 
 export let VGridView = widgets.DOMWidgetView.extend({
+  initialize: function() {
+    let interval_blocks = this.model.get('interval_blocks');
+    let database = this.model.get('database');
+
+    this.database = Database.from_json(database);
+    this.interval_blocks = interval_blocks.map((intervals) => {
+      let {video_id, interval_dict} = intervals;
+      return {
+        video_id: video_id,
+        interval_sets: _.mapValues(interval_dict, (intervals, name) =>
+          IntervalSet.from_json(intervals, vdata_from_json))
+      };
+    });
+  },
+
+  label_callback: function(labels) {
+    this.model.set('labels', labels.to_json());
+    this.model.save_changes();
+  },
+
   render: function() {
-    let data = this.model.get('result');
-    let settings = observable.map(this.model.get('settings'));
-
-    let fields = {
-      groups: [],
-      selected: [],
-      ignored: [],
-      labeledresult: []
-    };
-
-    let updateFields = (updates) => {
-      Object.assign(fields, updates);
-      for (let [k, v] of Object.entries(fields)) {
-        this.model.set(k, v);
-      }
-      this.model.save_changes();
-    };
-
-    let onUpdateGroups = (groups) => {
-      updateFields({groups: JSON.parse(JSON.stringify(groups))});
-    }
-
-    let onSelect = (selected) => {
-      updateFields({selected: selected});
-    };
-
-    let onIgnore = (ignored) => {
-      updateFields({ignored: ignored});
-    };
-
-    let onUpdateResult = (result) => {
-      updateFields({labeledresult: JSON.parse(JSON.stringify(result))});
-    }
-
     ReactDOM.render(
-      <VGridContainer data={data} settings={settings} onSelect={onSelect} onIgnore={onIgnore}
-        onUpdateResult={onUpdateResult}
-        onUpdateGroups={onUpdateGroups}/>,
+      <VGridContainer interval_blocks={this.interval_blocks} database={this.database}
+                      settings={this.model.get('settings')}
+                      label_callback={this.label_callback.bind(this)} />,
       this.el);
   },
 
