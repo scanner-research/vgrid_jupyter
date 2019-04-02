@@ -8,7 +8,7 @@ configure({ isolateGlobalState: true });
 
 import React from 'react';
 import ReactDOM from 'react-dom';
-import {IntervalSet, Database, VGrid} from 'vgrid';
+import {IntervalSet, Database, VGrid, vdata_from_json} from 'vgrid';
 
 // For some reason, `import` syntax doesn't work here? AMD issues?
 let widgets = require('@jupyter-widgets/base');
@@ -65,14 +65,17 @@ export class VGridContainer extends React.Component {
 
 export let VGridView = widgets.DOMWidgetView.extend({
   initialize: function() {
-    let intervals = this.model.get('intervals');
+    let interval_blocks = this.model.get('interval_blocks');
     let database = this.model.get('database');
 
     this.database = Database.from_json(database);
-    this.intervals = intervals.map((intervals) => {
+    this.interval_blocks = interval_blocks.map((intervals) => {
       let {video_id, interval_dict} = intervals;
-      return _.mapValues(interval_dict, (intervals, name) =>
-        IntervalSet.from_json(intervals, video_id, this.database, name == 'captions'));
+      return {
+        video_id: video_id,
+        interval_sets: _.mapValues(interval_dict, (intervals, name) =>
+          IntervalSet.from_json(intervals, vdata_from_json))
+      };
     });
   },
 
@@ -83,7 +86,7 @@ export let VGridView = widgets.DOMWidgetView.extend({
 
   render: function() {
     ReactDOM.render(
-      <VGridContainer intervals={this.intervals} database={this.database}
+      <VGridContainer interval_blocks={this.interval_blocks} database={this.database}
                       settings={this.model.get('settings')}
                       label_callback={this.label_callback.bind(this)} />,
       this.el);
