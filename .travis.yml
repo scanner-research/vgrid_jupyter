@@ -2,7 +2,7 @@ language: generic
 sudo: required
 install:
   - cd js
-  - npm install -g npm n
+  - sudo npm install -g npm n
   - sudo n stable
   - npm install
   - npm run prepublishOnly
