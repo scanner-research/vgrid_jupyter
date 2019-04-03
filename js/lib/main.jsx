@@ -8,7 +8,7 @@ configure({ isolateGlobalState: true });
 
 import React from 'react';
 import ReactDOM from 'react-dom';
-import {IntervalSet, Database, VGrid, vdata_from_json} from 'vgrid';
+import {IntervalSet, Database, VGrid, vdata_from_json} from '@wcrichto/vgrid';
 
 // For some reason, `import` syntax doesn't work here? AMD issues?
 let widgets = require('@jupyter-widgets/base');

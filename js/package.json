@@ -46,7 +46,8 @@
     "mobx": "^4.8.0",
     "mobx-react": "^5.4.3",
     "react": "^16.5.2",
-    "react-dom": "^16.5.2"
+    "react-dom": "^16.5.2",
+    "@wcrichto/vgrid": "^0.1.0"
   },
   "config": {
     "unsafe-perm": true
