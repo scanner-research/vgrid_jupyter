@@ -58,6 +58,7 @@ module.exports = [
      path: path.resolve(__dirname, '..', 'vgrid_jupyter', 'static'),
      libraryTarget: 'amd'
    },
+   devtool: 'source-map',
    module: { rules: rules }
   },
 
