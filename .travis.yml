@@ -1,10 +1,8 @@
 language: node_js
 node_js: 10
 install:
-  - cd js
   - npm install
-  - npm run prepublishOnly
-  - cd ..
+  - npm run build
   - pyenv install 3.5.0 && pyenv global 3.5.0
   - pip3 install .
 script: echo "No tests"
