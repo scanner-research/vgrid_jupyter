@@ -3,7 +3,7 @@ language: generic
 install:
   - cd js
   - npm install -g npm n
-  - n stable
+  - sudo n stable
   - npm install
   - npm run prepublishOnly
   - cd ..
