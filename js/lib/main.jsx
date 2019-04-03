@@ -1,4 +1,4 @@
-import 'vgrid/dist/vgrid.css';
+import '@wcrichto/vgrid/dist/vgrid.css';
 
 import {observable, configure} from 'mobx';
 
