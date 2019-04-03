@@ -1,11 +1,7 @@
-language: generic
-sudo: required
+language: node_js
+node_js: 10
 install:
   - cd js
-  - sudo mkdir -p /usr/local/n
-  - sudo chown -R $(whoami) /usr/local/n
-  - npm install -g npm n
-  - n stable
   - npm install
   - npm run prepublishOnly
   - cd ..
