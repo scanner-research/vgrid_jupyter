@@ -7,6 +7,7 @@ install:
   - cd ..
   - pyenv install 3.5.0 && pyenv global 3.5.0
   - pip3 install -e .
+script:
 deploy:
   provider: pypi
   user: wcrichto
