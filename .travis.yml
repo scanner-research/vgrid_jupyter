@@ -1,7 +1,13 @@
 language: generic
-python: 3.5
-node_js: 10
-install: cd js && npm install && npm run prepublishOnly && cd .. && pip install .
+
+install:
+  - cd js
+  - npm install -g npm n
+  - n stable
+  - npm install
+  - npm run prepublishOnly
+  - cd ..
+  - pip3 install .
 deploy:
   provider: pypi
   user: wcrichto
