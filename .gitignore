@@ -156,3 +156,5 @@ vgrid_jupyter/labextension/*.tgz
 vgrid_jupyter/labextension
 
 package-lock.json
+docs
+distjs
