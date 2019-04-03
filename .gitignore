@@ -154,3 +154,5 @@ vgrid_jupyter/labextension/*.tgz
 
 # Packed lab extensions
 vgrid_jupyter/labextension
+
+package-lock.json
