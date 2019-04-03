@@ -51,17 +51,17 @@ module.exports = [
    * difference is in the configuration of the webpack public path for the
    * static assets.
    *
-   * The target bundle is always `dist/index.js`, which is the path required by
+   * The target bundle is always `distjs/index.js`, which is the path required by
    * the custom widget embedder.
    */
   {
     entry: './src/index.ts',
     output: {
         filename: 'index.js',
-        path: path.resolve(__dirname, 'dist'),
+        path: path.resolve(__dirname, 'distjs'),
         libraryTarget: 'amd',
         library: "vgrid_jupyter",
-        publicPath: 'https://unpkg.com/vgrid_jupyter@' + version + '/dist/'
+        publicPath: 'https://unpkg.com/vgrid_jupyter@' + version + '/distjs/'
     },
     devtool: 'source-map',
     module: {
