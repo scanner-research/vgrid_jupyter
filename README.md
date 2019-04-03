@@ -8,7 +8,7 @@ This repository provides a plugin for using the [VGrid](https://github.com/scann
 
 ### From pip
 
-```bash
+```
 pip3 install vgrid_jupyter
 jupyter nbextension enable --py --sys-prefix vgrid_jupyter
 ```
