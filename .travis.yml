@@ -1,5 +1,5 @@
 language: generic
-
+sudo: required
 install:
   - cd js
   - npm install -g npm n
