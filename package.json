@@ -49,7 +49,7 @@
     "mobx-react": "^5.4.3",
     "react": "^16.5.2",
     "react-dom": "^16.5.2",
-    "@wcrichto/vgrid": "^0.1.0"
+    "@wcrichto/vgrid": "latest"
   },
   "devDependencies": {
     "@phosphor/application": "^1.6.0",
