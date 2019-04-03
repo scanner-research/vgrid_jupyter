@@ -1,29 +1,26 @@
-
-# vgrid_jupyter
+# vgrid_jupyter: Jupyter integration for VGrid
 
 [![Build Status](https://travis-ci.org/scanner-research/vgrid_jupyter.svg?branch=master)](https://travis-ci.org/scanner-research/vgrid_jupyter)
-[![codecov](https://codecov.io/gh/scanner-research/vgrid_jupyter/branch/master/graph/badge.svg)](https://codecov.io/gh/scanner-research/vgrid_jupyter)
 
-
-Jupyter integration for vgrid
+This repository provides a plugin for using the [VGrid](https://github.com/scanner-research/vgrid) javascript library in a Jupyter notebook.
 
 ## Installation
 
-You can install using `pip`:
+### From pip
 
 ```bash
-pip install vgrid_jupyter
+pip3 install vgrid_jupyter
+jupyter nbextension enable --py --sys-prefix vgrid_jupyter
 ```
 
-Or if you use jupyterlab:
+### From source
 
-```bash
-pip install vgrid_jupyter
-jupyter labextension install @jupyter-widgets/jupyterlab-manager
 ```
-
-If you are using Jupyter Notebook 5.2 or earlier, you may also need to enable
-the nbextension:
-```bash
-jupyter nbextension enable --py [--sys-prefix|--user|--system] vgrid_jupyter
+git clone https://github.com/scanner-research/vgrid_jupyter
+cd vgrid_jupyter
+npm install
+npm run build
+pip3 install -e .
+jupyter nbextension install --py --sys-prefix --symlink vgrid_jupyter
+jupyter nbextension enable --py --sys-prefix vgrid_jupyter
 ```
