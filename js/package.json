@@ -21,7 +21,7 @@
     "dist/*.js"
   ],
   "scripts": {
-    "prepublish": "webpack -p",
+    "prepublishOnly": "webpack -p",
     "build": "webpack",
     "watch": "webpack -w"
   },
