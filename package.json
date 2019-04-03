@@ -54,7 +54,7 @@
   "devDependencies": {
     "@phosphor/application": "^1.6.0",
     "@phosphor/widgets": "^1.6.0",
-    "@types/node": "^10.11.6",
+    "@types/node": "^10.14.4",
     "@types/react": "^16.8.3",
     "@types/react-dom": "^16.8.2",
     "@types/webpack-env": "^1.13.6",
