@@ -1,9 +1,10 @@
-from .main import *
+#!/usr/bin/env python
+# coding: utf-8
 
-def _jupyter_nbextension_paths():
-    return [{
-        'section': 'notebook',
-        'src': 'static',
-        'dest': 'vgrid_jupyter',
-        'require': 'vgrid_jupyter/extension'
-    }]
+# Copyright (c) Will Crichton.
+# Distributed under the terms of the Modified BSD License.
+
+from .vgrid_widget import VGridWidget
+from ._version import __version__, version_info
+
+from .nbextension import _jupyter_nbextension_paths

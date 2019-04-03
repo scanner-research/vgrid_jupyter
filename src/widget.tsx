@@ -1,5 +1,17 @@
+// Copyright (c) Will Crichton
+// Distributed under the terms of the Modified BSD License.
+
+import {
+  DOMWidgetModel, DOMWidgetView, ISerializers
+} from '@jupyter-widgets/base';
+
+import {
+  MODULE_NAME, MODULE_VERSION
+} from './version';
+
 import '@wcrichto/vgrid/dist/vgrid.css';
 
+import * as _ from 'lodash';
 import {observable, configure} from 'mobx';
 
 // Avoid "multiple mobx instances in application" issue
@@ -8,20 +20,44 @@ configure({ isolateGlobalState: true });
 
 import React from 'react';
 import ReactDOM from 'react-dom';
-import {IntervalSet, Database, VGrid, vdata_from_json} from '@wcrichto/vgrid';
-
-// For some reason, `import` syntax doesn't work here? AMD issues?
-let widgets = require('@jupyter-widgets/base');
+import {VGridProps, IntervalSet, Database, VGrid, LabelState, vdata_from_json} from '@wcrichto/vgrid';
 
 // Use window.require so webpack doesn't try to import ahead of time
-let Jupyter = window.require('base/js/namespace');
+let Jupyter = (window as any).require('base/js/namespace');
 
-export class VGridContainer extends React.Component {
+export
+class VGridModel extends DOMWidgetModel {
+  defaults() {
+    return {...super.defaults(),
+      _model_name: VGridModel.model_name,
+      _model_module: VGridModel.model_module,
+      _model_module_version: VGridModel.model_module_version,
+      _view_name: VGridModel.view_name,
+      _view_module: VGridModel.view_module,
+      _view_module_version: VGridModel.view_module_version,
+      value : 'Hello World'
+    };
+  }
+
+  static serializers: ISerializers = {
+      ...DOMWidgetModel.serializers,
+      // Add any extra serializers here
+    }
+
+  static model_name = 'VGridModel';
+  static model_module = MODULE_NAME;
+  static model_module_version = MODULE_VERSION;
+  static view_name = 'VGridView';   // Set to null if no view
+  static view_module = MODULE_NAME;   // Set to null if no view
+  static view_module_version = MODULE_VERSION;
+}
+
+class VGridContainer extends React.Component<VGridProps, {keyboardDisabled: boolean}> {
   state = {
     keyboardDisabled: false
   }
 
-  _timer = null
+  _timer: any = null
 
   _onClick = () => {
     let disabled = !this.state.keyboardDisabled;
@@ -56,47 +92,51 @@ export class VGridContainer extends React.Component {
     return (
       <div className='vgrid-container' onClick={(e) => { e.stopPropagation(); }}>
         {JupyterButton}
-        {this.props.data !== null ? <VGrid {...this.props} /> : <span>No results.</span>}
+        <VGrid {...this.props} />
         {JupyterButton}
       </div>
     )
   }
 }
 
-export let VGridView = widgets.DOMWidgetView.extend({
-  initialize: function() {
+export
+class VGridView extends DOMWidgetView {
+  database: Database
+  interval_blocks: {interval_sets: {[key: string]: IntervalSet}, video_id: number}[]
+
+  constructor(params: any) {
+    super(params);
+
     let interval_blocks = this.model.get('interval_blocks');
     let database = this.model.get('database');
 
     this.database = Database.from_json(database);
-    this.interval_blocks = interval_blocks.map((intervals) => {
+    this.interval_blocks = interval_blocks.map((intervals: any) => {
       let {video_id, interval_dict} = intervals;
       return {
         video_id: video_id,
         interval_sets: _.mapValues(interval_dict, (intervals, name) =>
-          IntervalSet.from_json(intervals, vdata_from_json))
+          (IntervalSet as any).from_json(intervals, vdata_from_json))
       };
     });
-  },
+  }
 
-  label_callback: function(labels) {
+  label_callback(labels: LabelState) {
     this.model.set('labels', labels.to_json());
     this.model.save_changes();
-  },
+  }
 
-  render: function() {
+  render() {
     ReactDOM.render(
-      <VGridContainer interval_blocks={this.interval_blocks} database={this.database}
+      <VGridContainer interval_blocks={this.interval_blocks!} database={this.database!}
                       settings={this.model.get('settings')}
                       label_callback={this.label_callback.bind(this)} />,
       this.el);
-  },
+  }
 
-  remove: function() {
+  remove() {
     if (!ReactDOM.unmountComponentAtNode(this.el)) {
       console.error('Failed to unmount VGrid');
     }
   }
-});
-
-export let version = require('../package.json').version;
+}
