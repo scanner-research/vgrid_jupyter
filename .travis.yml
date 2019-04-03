@@ -6,7 +6,7 @@ install:
   - npm run prepublishOnly
   - cd ..
   - pyenv install 3.5.0 && pyenv global 3.5.0
-  - pip3 install .
+  - pip3 install -e .
 deploy:
   provider: pypi
   user: wcrichto
