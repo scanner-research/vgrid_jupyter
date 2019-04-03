@@ -21,7 +21,7 @@
     "dist/*.js"
   ],
   "scripts": {
-    "prepublishOnly": "webpack -p",
+    "prepublishOnly": "webpack --define process.env.NODE_ENV=production",
     "build": "webpack",
     "watch": "webpack -w"
   },
