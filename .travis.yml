@@ -11,7 +11,6 @@ deploy:
   user: wcrichto
   password:
     secure: Vc8dNhbSUtiJdcXi0bqYsq170BhLuJc5N1cw9miHa0sI7yt8vHJAzqcJVl0xK0fD5bn4Bp/MAiRqnGbviqs6yi5sLe5rEoMVOpjrKNokFpCcerh6GSfbN8Ur8jOZUuAm1sto0c8pjYcQ9LVSUeeL1z2Qg+GRTIlwhTU42Lk09G193NqEwi7cYt43oeXTXLP9UwRvN6rr2s2IkmBW+c3GrZjjwv1vbRJq1BXUeCJtjJ3P6ZChtJIBBR2JmN4MUYolVUy9/n3AKA2G/IZGuxsPXaXn/9NZgbvUTiyqYEEzl77H20OUEiFVlNb75gFiP0STZj6XrYS6ZVtIZMe6z5/I39YLiKC03x5QrSoU/GrbrG4q1UJHY17Teb7b2Qt9WyFs/ok/J/rCRE39jMkXpqduCRI9OwRUGHjYOq91Hf4AjjgXaOHQsjqSE5xvPkB3YSk4G/HC81GrolLqrQHAwMOUZ9VewdNNPGXR7MpsAK90zP9gdQMyxmMiTrxqXYfjNttdXdwgYIS0bQ6q86U5arOchmK8iKYRb6en6/8YLsfQMPhtWqVo34h+3InMTrfG6xolszu+BiELxS/iaVmeusZHzdslNT+z2Et/oVl/igtQ36BcD2QVn10oMWtKWdCyt1E2YeuvirN6pSZAPUdMDCE9Q5JB1jw2EDd2SOqSA1oYUds=
-  skip_cleanup: true # Don't clean/reset working directory
   on:
     tags: true
     distributions: bdist_wheel
