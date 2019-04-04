@@ -39,6 +39,7 @@ jstargets = [
 package_data_spec = {
     name: [
         'nbextension/static/*.*js*',
+        'nbextension/static/*.*css*',
         'labextension/*.tgz'
     ]
 }
@@ -46,6 +47,8 @@ package_data_spec = {
 data_files_spec = [
     ('share/jupyter/nbextensions/vgrid_jupyter',
         nb_path, '*.js*'),
+    ('share/jupyter/nbextensions/vgrid_jupyter',
+        nb_path, '*.css*'),
     ('share/jupyter/lab/extensions', lab_path, '*.tgz'),
     ('etc/jupyter/nbconfig/notebook.d' , HERE, 'vgrid_jupyter.json')
 ]
@@ -54,7 +57,7 @@ data_files_spec = [
 cmdclass = create_cmdclass('jsdeps', package_data_spec=package_data_spec,
     data_files_spec=data_files_spec)
 cmdclass['jsdeps'] = combine_commands(
-    install_npm(HERE, build_cmd='build:all'),
+    install_npm(HERE, build_cmd='build:all', force=True),
     ensure_targets(jstargets),
 )
 
