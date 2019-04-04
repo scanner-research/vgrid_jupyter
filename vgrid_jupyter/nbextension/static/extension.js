@@ -19,7 +19,7 @@ define(function() {
       let link = document.createElement('link');
       link.setAttribute('rel', 'stylesheet');
       link.type ='text/css';
-      link.href = `${__webpack_public_path__}/main.css`;
+      link.href = `${__webpack_public_path__}/index.css`;
       document.head.appendChild(link);
     }
   };
