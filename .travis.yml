@@ -14,4 +14,4 @@ deploy:
   skip_cleanup: true # Don't clean/reset working directory
   on:
     tags: true
-    distributions: sdist bdist_wheel
+    distributions: bdist_wheel
