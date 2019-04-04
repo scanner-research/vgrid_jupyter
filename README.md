@@ -6,7 +6,7 @@ This repository provides a plugin for using the [VGrid](https://github.com/scann
 
 ## Installation
 
-You must have Python 3 and [npm](https://www.npmjs.com/get-npm) installed.
+You must have Python 3 and [npm](https://www.npmjs.com/get-npm) already installed.
 
 ### From pip
 
