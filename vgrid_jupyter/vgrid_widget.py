@@ -24,6 +24,5 @@ class VGridWidget(DOMWidget):
     _view_module_version = Unicode(module_version).tag(sync=True)
 
     settings = Dict({}).tag(sync=True)
-    interval_blocks = List([]).tag(sync=True)
-    database = Dict({}).tag(sync=True)
+    interval_blocks = Dict([]).tag(sync=True)
     labels = Dict({}).tag(sync=True)

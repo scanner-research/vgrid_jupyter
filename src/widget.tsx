@@ -35,7 +35,6 @@ class VGridModel extends DOMWidgetModel {
       _view_name: VGridModel.view_name,
       _view_module: VGridModel.view_module,
       _view_module_version: VGridModel.view_module_version,
-      value : 'Hello World'
     };
   }
 
@@ -107,8 +106,7 @@ class VGridView extends DOMWidgetView {
   constructor(params: any) {
     super(params);
 
-    let interval_blocks = this.model.get('interval_blocks');
-    let database = this.model.get('database');
+    let {interval_blocks, database} = this.model.get('interval_blocks');
 
     this.database = Database.from_json(database);
     this.interval_blocks = interval_blocks.map((intervals: any) => {
