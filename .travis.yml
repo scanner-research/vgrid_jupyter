@@ -1,14 +1,14 @@
 language: node_js
 node_js: 10
 install:
-  - pyenv install 3.5.0 && pyenv global 3.5.0
-  - pip3 install .
+- pyenv install 3.5.0 && pyenv global 3.5.0
+- pip3 install .
 script: echo "No tests"
 deploy:
   provider: pypi
   user: wcrichto
   password:
-    secure: Vc8dNhbSUtiJdcXi0bqYsq170BhLuJc5N1cw9miHa0sI7yt8vHJAzqcJVl0xK0fD5bn4Bp/MAiRqnGbviqs6yi5sLe5rEoMVOpjrKNokFpCcerh6GSfbN8Ur8jOZUuAm1sto0c8pjYcQ9LVSUeeL1z2Qg+GRTIlwhTU42Lk09G193NqEwi7cYt43oeXTXLP9UwRvN6rr2s2IkmBW+c3GrZjjwv1vbRJq1BXUeCJtjJ3P6ZChtJIBBR2JmN4MUYolVUy9/n3AKA2G/IZGuxsPXaXn/9NZgbvUTiyqYEEzl77H20OUEiFVlNb75gFiP0STZj6XrYS6ZVtIZMe6z5/I39YLiKC03x5QrSoU/GrbrG4q1UJHY17Teb7b2Qt9WyFs/ok/J/rCRE39jMkXpqduCRI9OwRUGHjYOq91Hf4AjjgXaOHQsjqSE5xvPkB3YSk4G/HC81GrolLqrQHAwMOUZ9VewdNNPGXR7MpsAK90zP9gdQMyxmMiTrxqXYfjNttdXdwgYIS0bQ6q86U5arOchmK8iKYRb6en6/8YLsfQMPhtWqVo34h+3InMTrfG6xolszu+BiELxS/iaVmeusZHzdslNT+z2Et/oVl/igtQ36BcD2QVn10oMWtKWdCyt1E2YeuvirN6pSZAPUdMDCE9Q5JB1jw2EDd2SOqSA1oYUds=
+    secure: GFcOqo/4gNoM8QW0lYeLezYr8cOEmI0xftmGfqv4/9KDcb7t4YJ1mir4CrNu43qCbmJeTCQY0EYcoPLE+AT7NPBcCCYA9IsKo5Yl9a6JqYmLNH2c7Xz5x2LmgqCZn6sa5WRMSqrW+ViGbpMFkp825HM7ik7VxkHpFXPmtawDm5Nvq+y8nJmKZ27c0HXEpWG0ZQJsGN1dnNqyt04es7m4QZ6xBIzArx5BkCfqNIoyfKUBf+SYA2okiTHXPpKjsxEyOFL0IKQCcldu5tcF8Ux7uW6dEC1kL6pPlpuSwXqXAsH67s11o0EF2rhFfNAI9dEZrT/J5iY/3UbbtWV7tFeiTkva4MDu0AxldXhkYaTxII1AWsm2KGGmk/WTBPndSD96198EZKp5RUfpwTaJFhvhClMTC3plC6hJCjriikqK5f3MgkSfpFimSRFBORye2SX0D8OtG+N8I5VMEAi4Aalfn6eRscjk6W3JLYGiAk/UKpnTuzEkqrNZKVojCz/+bKkzVFF7u95n62ixncGiu74Yvf694MPS39XPZzpomdTm0NjZNjM8Zy7bB7Ab1y5V9eZyYl69AJDkp2irR2gM6v6rLM2tky/5PVhXFdy4+HfA/wSCe3BVJuEoTU5GMl/GA6yvliE5QmJ3+fw3M1RP2z2/CpjMGnXTvjYFZ443lZovHPY=
   distributions: bdist_wheel
   on:
     tags: true
