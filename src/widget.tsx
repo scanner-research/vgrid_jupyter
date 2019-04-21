@@ -20,7 +20,7 @@ configure({ isolateGlobalState: true });
 
 import React from 'react';
 import ReactDOM from 'react-dom';
-import {VGridProps, IntervalSet, Database, VGrid, LabelState, vdata_from_json} from '@wcrichto/vgrid';
+import {VGridProps, IntervalSet, Database, VGrid, LabelState, IntervalBlock, interval_blocks_from_json} from '@wcrichto/vgrid';
 
 // Use window.require so webpack doesn't try to import ahead of time
 let Jupyter = (window as any).require('base/js/namespace');
@@ -106,21 +106,13 @@ class VGridView extends DOMWidgetView {
   constructor(params: any) {
     super(params);
 
-    let {interval_blocks, database} = this.model.get('interval_blocks');
-
+    let {interval_blocks, database} = this.model.get('vgrid_json');
     this.database = Database.from_json(database);
-    this.interval_blocks = interval_blocks.map((intervals: any) => {
-      let {video_id, interval_dict} = intervals;
-      return {
-        video_id: video_id,
-        interval_sets: _.mapValues(interval_dict, (intervals, name) =>
-          (IntervalSet as any).from_json(intervals, vdata_from_json))
-      };
-    });
+    this.interval_blocks = interval_blocks_from_json(interval_blocks);
   }
 
-  label_callback(labels: LabelState) {
-    this.model.set('labels', labels.to_json());
+  label_callback(label_state: LabelState) {
+    this.model.set('label_state', label_state.to_json());
     this.model.save_changes();
   }
 
