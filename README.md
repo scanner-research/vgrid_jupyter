@@ -1,6 +1,6 @@
 # vgrid_jupyter: Jupyter integration for VGrid
 
-[![Build Status](https://travis-ci.org/scanner-research/vgrid_jupyter.svg?branch=master)](https://travis-ci.org/scanner-research/vgrid_jupyter)
+[![Build Status](https://travis-ci.com/scanner-research/vgrid_jupyter.svg?branch=master)](https://travis-ci.com/scanner-research/vgrid_jupyter)
 
 This repository provides a plugin for using the [VGrid](https://github.com/scanner-research/vgrid) javascript library in a Jupyter notebook.
 
