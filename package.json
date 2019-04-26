@@ -1,6 +1,6 @@
 {
   "name": "vgrid_jupyter",
-  "version": "0.1.8",
+  "version": "0.1.9",
   "description": "Jupyter integration for vgrid",
   "keywords": [
     "jupyter",
