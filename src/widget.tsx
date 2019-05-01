@@ -20,7 +20,7 @@ configure({ isolateGlobalState: true });
 
 import React from 'react';
 import ReactDOM from 'react-dom';
-import {VGridProps, IntervalSet, Database, VGrid, LabelState, IntervalBlock, interval_blocks_from_json} from '@wcrichto/vgrid';
+import {VGridProps, IntervalSet, Database, VGrid, LabelState, IntervalBlock, NamedIntervalSet, interval_blocks_from_json} from '@wcrichto/vgrid';
 
 // Use window.require so webpack doesn't try to import ahead of time
 let Jupyter = (window as any).require('base/js/namespace');
@@ -101,14 +101,16 @@ class VGridContainer extends React.Component<VGridProps, {keyboardDisabled: bool
 export
 class VGridView extends DOMWidgetView {
   database: Database
-  interval_blocks: {interval_sets: {[key: string]: IntervalSet}, video_id: number}[]
+  interval_blocks: IntervalBlock[]
+  settings: any
 
   constructor(params: any) {
     super(params);
 
-    let {interval_blocks, database} = this.model.get('vgrid_json');
+    let {interval_blocks, database, settings} = this.model.get('vgrid_spec');
     this.database = Database.from_json(database);
     this.interval_blocks = interval_blocks_from_json(interval_blocks);
+    this.settings = settings;
   }
 
   label_callback(label_state: LabelState) {
@@ -119,7 +121,7 @@ class VGridView extends DOMWidgetView {
   render() {
     ReactDOM.render(
       <VGridContainer interval_blocks={this.interval_blocks!} database={this.database!}
-                      settings={this.model.get('settings')}
+                      settings={this.settings}
                       label_callback={this.label_callback.bind(this)} />,
       this.el);
   }

@@ -3,7 +3,6 @@
 
 # Copyright (c) Will Crichton.
 # Distributed under the terms of the Modified BSD License.
-
 """
 TODO: Add module docstring
 """
@@ -23,6 +22,5 @@ class VGridWidget(DOMWidget):
     _view_module = Unicode(module_name).tag(sync=True)
     _view_module_version = Unicode(module_version).tag(sync=True)
 
-    vgrid_json = Dict({}).tag(sync=True)
-    settings = Dict({}).tag(sync=True)
+    vgrid_spec = Dict({}).tag(sync=True)
     label_state = Dict({}).tag(sync=True)
