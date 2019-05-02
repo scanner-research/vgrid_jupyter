@@ -33,26 +33,26 @@ jupyter nbextension enable --py --sys-prefix vgrid_jupyter
 This module exports one class `VGridWidget` that embeds VGrid in a Jupyter cell. See the [VGrid documentation](https://github.com/scanner-research/vgrid#example-usage) for explanation of the VGrid Python API.
 
 ```python
-from rekall import Interval, IntervalSet, IntervalSetMapping, Bounds3D
-from vgrid import VideoVBlocksBuilder, VideoTrackBuilder, VideoMetadata
+from rekall import Interval, IntervalSet, Bounds3D, IntervalSetMapping
+from vgrid import VGridSpec, VideoMetadata, VideoBlockFormat, LabelState
 from vgrid_jupyter import VGridWidget
 
 video_id = 1
 video = VideoMetadata(path='test.mp4', id=video_id)
-iset = IntervalSet([Interval(Bounds3D(0, 10)), Interval(Bounds3D(20, 30))])
-intervals = IntervalSetMapping({video_id: iset})
+intervals = IntervalSet([Interval(Bounds3D(0, 10))])
+interval_map = IntervalSetMapping({video_id: intervals})
 
-vgrid_json = VideoVBlocksBuilder() \
-    .add_track(VideoTrackBuilder('test', intervals)) \
-    .add_video_metadata('http://localhost:8000', [video]) \
-    .build()
+vgrid_spec = VGridSpec(
+  video_meta=[video],
+  vis_format=VideoBlockFormat([('test', interval_map)]))
 
-vgrid_widget = VGridWidget(vgrid_json=vgrid_json)
+vgrid_widget = VGridWidget(vgrid_spec=vgrid_spec.to_json())
 vgrid_widget
 ```
 
 Putting this sample into a code cell will make VGrid render beneath it. In a different code cell, you can access any created labels through:
 
 ```python
-print(vgrid_widget.label_state)
+label_state = LabelState(vgrid_widget.label_state)
+print(label_state.block_labels(), label_state.blocks_selected())
 ```
