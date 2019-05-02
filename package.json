@@ -40,7 +40,7 @@
     "prepack": "npm run build:lib",
     "watch": "npm-run-all -p watch:*",
     "watch:lib": "tsc -w",
-    "watch:nbextension": "webpack --watch"
+    "watch:nbextension": "webpack --watch -d"
   },
   "dependencies": {
     "@jupyter-widgets/base": "^1.1.10",
@@ -48,6 +48,7 @@
     "lodash": "^4.17.4",
     "mobx": "^4.8.0",
     "mobx-react": "^5.4.3",
+    "pako": "^1.0.10",
     "react": "^16.5.2",
     "react-dom": "^16.5.2"
   },
@@ -56,6 +57,7 @@
     "@phosphor/widgets": "^1.6.0",
     "@types/core-js": "^2.5.0",
     "@types/node": "^10.14.4",
+    "@types/pako": "^1.0.1",
     "@types/react": "^16.8.3",
     "@types/react-dom": "^16.8.2",
     "@types/webpack-env": "^1.13.6",

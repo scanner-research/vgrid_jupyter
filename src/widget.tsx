@@ -20,6 +20,7 @@ configure({ isolateGlobalState: true });
 
 import React from 'react';
 import ReactDOM from 'react-dom';
+import * as pako from 'pako';
 import {VGridProps, IntervalSet, Database, VGrid, LabelState, IntervalBlock, NamedIntervalSet, interval_blocks_from_json} from '@wcrichto/vgrid';
 
 // Use window.require so webpack doesn't try to import ahead of time
@@ -110,7 +111,16 @@ class VGridView extends DOMWidgetView {
   constructor(params: any) {
     super(params);
 
-    let {interval_blocks, database, settings} = this.model.get('vgrid_spec');
+    let vgrid_spec = this.model.get('vgrid_spec');
+
+    // Decompress JSON object if it's compressed
+    if (vgrid_spec.compressed) {
+      let spec_bytes = pako.inflate(vgrid_spec.data.buffer);
+      let spec_string = new TextDecoder().decode(spec_bytes);
+      vgrid_spec = JSON.parse(spec_string);
+    }
+
+    let {interval_blocks, database, settings} = vgrid_spec;
     this.database = Database.from_json(database);
     this.interval_blocks = interval_blocks_from_json(interval_blocks);
     this.settings = settings;
