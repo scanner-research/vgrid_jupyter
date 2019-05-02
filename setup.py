@@ -8,15 +8,10 @@ from __future__ import print_function
 from glob import glob
 from os.path import join as pjoin
 
-
-from setupbase import (
-    create_cmdclass, install_npm, ensure_targets,
-    find_packages, combine_commands, ensure_python,
-    get_version, HERE
-)
+from setupbase import (create_cmdclass, install_npm, ensure_targets, find_packages,
+                       combine_commands, ensure_python, get_version, HERE)
 
 from setuptools import setup
-
 
 # The name of the project
 name = 'vgrid_jupyter'
@@ -37,45 +32,36 @@ jstargets = [
 ]
 
 package_data_spec = {
-    name: [
-        'nbextension/static/*.*js*',
-        'nbextension/static/*.*css*',
-        'labextension/*.tgz'
-    ]
+    name: ['nbextension/static/*.*js*', 'nbextension/static/*.*css*', 'labextension/*.tgz']
 }
 
-data_files_spec = [
-    ('share/jupyter/nbextensions/vgrid_jupyter',
-        nb_path, '*.js*'),
-    ('share/jupyter/nbextensions/vgrid_jupyter',
-        nb_path, '*.css*'),
-    ('share/jupyter/lab/extensions', lab_path, '*.tgz'),
-    ('etc/jupyter/nbconfig/notebook.d' , HERE, 'vgrid_jupyter.json')
-]
+data_files_spec = [('share/jupyter/nbextensions/vgrid_jupyter', nb_path, '*.js*'),
+                   ('share/jupyter/nbextensions/vgrid_jupyter', nb_path, '*.css*'),
+                   ('share/jupyter/lab/extensions', lab_path, '*.tgz'),
+                   ('etc/jupyter/nbconfig/notebook.d', HERE, 'vgrid_jupyter.json')]
 
-
-cmdclass = create_cmdclass('jsdeps', package_data_spec=package_data_spec,
-    data_files_spec=data_files_spec)
+cmdclass = create_cmdclass('jsdeps',
+                           package_data_spec=package_data_spec,
+                           data_files_spec=data_files_spec)
 cmdclass['jsdeps'] = combine_commands(
     install_npm(HERE, build_cmd='build:all', force=True),
     ensure_targets(jstargets),
 )
 
-
 setup_args = dict(
-    name            = name,
-    description     = 'Jupyter integration for vgrid',
-    version         = version,
-    scripts         = glob(pjoin('scripts', '*')),
-    cmdclass        = cmdclass,
-    packages        = find_packages(),
-    author          = 'Will Crichton',
-    author_email    = 'wcrichto@cs.stanford.edu',
-    url             = 'https://github.com/scanner-research/vgrid_jupyter',
-    license         = 'BSD',
-    platforms       = "Linux, Mac OS X, Windows",
-    keywords        = ['Jupyter', 'Widgets', 'IPython'],
-    classifiers     = [
+    name=name,
+    description='Jupyter integration for vgrid',
+    version=version,
+    scripts=glob(pjoin('scripts', '*')),
+    cmdclass=cmdclass,
+    packages=find_packages(),
+    author='Will Crichton',
+    author_email='wcrichto@cs.stanford.edu',
+    url='https://github.com/scanner-research/vgrid_jupyter',
+    license='BSD',
+    platforms="Linux, Mac OS X, Windows",
+    keywords=['Jupyter', 'Widgets', 'IPython'],
+    classifiers=[
         'Intended Audience :: Developers',
         'Intended Audience :: Science/Research',
         'License :: OSI Approved :: BSD License',
@@ -87,12 +73,12 @@ setup_args = dict(
         'Programming Language :: Python :: 3.7',
         'Framework :: Jupyter',
     ],
-    include_package_data = True,
-    install_requires = [
+    include_package_data=True,
+    install_requires=[
         'ipywidgets>=7.0.0',
-        'rekallpy'
+        'vgridpy',
     ],
-    extras_require = {
+    extras_require={
         'test': [
             'pytest>=3.6',
             'pytest-cov',
@@ -112,8 +98,7 @@ setup_args = dict(
             'pypandoc',
         ],
     },
-    entry_points = {
-    },
+    entry_points={},
 )
 
 if __name__ == '__main__':
