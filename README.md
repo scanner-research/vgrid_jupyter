@@ -53,6 +53,6 @@ vgrid_widget
 Putting this sample into a code cell will make VGrid render beneath it. In a different code cell, you can access any created labels through:
 
 ```python
-label_state = LabelState(vgrid_widget.label_state)
+label_state = LabelState(lambda: vgrid_widget.label_state)
 print(label_state.block_labels(), label_state.blocks_selected())
 ```
