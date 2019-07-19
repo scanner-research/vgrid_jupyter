@@ -1,6 +1,6 @@
 {
   "name": "vgrid_jupyter",
-  "version": "0.1.12",
+  "version": "0.1.13",
   "description": "Jupyter integration for vgrid",
   "keywords": [
     "jupyter",
@@ -74,7 +74,7 @@
     "source-map-loader": "^0.2.4",
     "style-loader": "^0.23.1",
     "ts-loader": "^5.2.1",
-    "typescript": "~3.1.2",
+    "typescript": "3.2.x",
     "webpack": "^4.20.2",
     "webpack-cli": "^3.1.2"
   },
