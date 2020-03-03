@@ -3,7 +3,7 @@ node_js: 10
 install:
 - pyenv install 3.5.0 && pyenv global 3.5.0
 - npm install && npm run build
-- pip3 install -U pip3
+- pip install --upgrade pip
 - pip3 install --upgrade setuptools
 - pip3 install .
 script: echo "No tests"
