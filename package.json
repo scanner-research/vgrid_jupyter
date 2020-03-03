@@ -46,7 +46,7 @@
     "@jupyter-widgets/base": "^1.1.10",
     "@wcrichto/vgrid": "latest",
     "lodash": "^4.17.4",
-    "mobx": "^4.8.0",
+    "mobx": "4.8.0",
     "mobx-react": "^5.4.3",
     "pako": "^1.0.10",
     "react": "^16.8.2",
